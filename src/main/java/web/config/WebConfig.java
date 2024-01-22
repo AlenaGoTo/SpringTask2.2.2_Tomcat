@@ -25,17 +25,19 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Bean
     public SpringResourceTemplateResolver templateResolver() {
+        // определение того, как будут доступны шаблоны
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(applicationContext);
-        templateResolver.setPrefix("/WEB-INF/pages/");
-        templateResolver.setSuffix(".html");
+        templateResolver.setPrefix("/WEB-INF/pages/"); // путь до шаблонов
+        templateResolver.setSuffix(".html"); // формат
         return templateResolver;
     }
 
     @Bean
     public SpringTemplateEngine templateEngine() {
+        // Создание и настройка объекта TemplateEngine
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-        templateEngine.setTemplateResolver(templateResolver());
+        templateEngine.setTemplateResolver(templateResolver()); // Устанавливает один преобразователь шаблонов для этого механизма шаблонов
         templateEngine.setEnableSpringELCompiler(true);
         return templateEngine;
     }
@@ -43,6 +45,8 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {
+        // ViewResolver сопоставляет имена представлений, возвращаемые контроллером, с фактическими объектами представлений
+        // ThymeleafViewResolver используется для определения того, какие представления Thymeleaf отображать, учитывая имя представления
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         resolver.setTemplateEngine(templateEngine());
         registry.viewResolver(resolver);
