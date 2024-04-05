@@ -11,8 +11,9 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
+// класс конфигурирования Спринг MVC-приложения (для DispatcherServlet)
 @Configuration
-@EnableWebMvc
+@EnableWebMvc // регистрирует бины из Спринг MVC и адаптирует их к нашим бинам
 @ComponentScan("web")
 public class WebConfig implements WebMvcConfigurer {
 
@@ -22,10 +23,10 @@ public class WebConfig implements WebMvcConfigurer {
         this.applicationContext = applicationContext;
     }
 
-
+    // ниже настройки интеграции Thymeleaf со Spring MVC
     @Bean
     public SpringResourceTemplateResolver templateResolver() {
-        // определение того, как будут доступны шаблоны
+        // определение доступа и чтения ресурсов (преобразователь шаблонов)
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(applicationContext);
         templateResolver.setPrefix("/WEB-INF/pages/"); // путь до шаблонов
@@ -41,7 +42,6 @@ public class WebConfig implements WebMvcConfigurer {
         templateEngine.setEnableSpringELCompiler(true);
         return templateEngine;
     }
-
 
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {
