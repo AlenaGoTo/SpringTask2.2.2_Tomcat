@@ -8,7 +8,6 @@ import java.util.List;
 
 @Repository
 public class CarDao {
-    // работа над entity объектом
     // создание и получение списка машин
     private static List<String> cars;
 

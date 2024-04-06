@@ -39,7 +39,7 @@ public class WebConfig implements WebMvcConfigurer {
         // Создание и настройка объекта TemplateEngine
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
         templateEngine.setTemplateResolver(templateResolver()); // Устанавливает один преобразователь шаблонов для этого механизма шаблонов
-        templateEngine.setEnableSpringELCompiler(true);
+        templateEngine.setEnableSpringELCompiler(false); // компилятор SpEL
         return templateEngine;
     }
 
